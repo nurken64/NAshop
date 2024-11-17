@@ -11,22 +11,22 @@ if not os.environ.get('FLASK_SECRET_KEY'):
 
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 
-db_host = os.environ.get('DB_HOST', 'localhost')
-db_user = os.environ.get('DB_USER', 'root')
-db_password = os.environ.get('DB_PASSWORD', '0000')
-db_database = os.environ.get('DB_DATABASE','back')
+db_host = os.environ.get('DB_HOST', 'shopNA.mysql.pythonanywhere-services.com')
+db_user = os.environ.get('DB_USER', 'shopNA')
+db_password = os.environ.get('DB_PASSWORD', 'password000')
+db_database = os.environ.get('DB_DATABASE','shopNA$back')
 
 db_config = {
-    'host': db_host,
-    'user': db_user,
-    'password': db_password,
-    'database': db_database,
+    'host': 'shopNA.mysql.pythonanywhere-services.com',
+    'user': 'shopNA',
+    'password': 'password000',
+    'database': 'shopNA$back',
     'auth_plugin': 'mysql_native_password'
 }
 
 @app.route('/')
 def test():
-    return "Blank page"
+    return redirect(url_for('signin'))
 
 @app.route('/home')
 def home():
@@ -481,7 +481,7 @@ def shipping():
 
 @app.route('/videos')
 def videos():
-    api_key = ''
+    api_key = 'AIzaSyBHQ_sAOG7Nndu5soo5lAp6KDDRZIv4EBg'
     search_query = 'Kazakh meals'
     url = f'https://www.googleapis.com/youtube/v3/search?key={api_key}&part=snippet&type=video&q={search_query}'
     response = requests.get(url)
@@ -500,5 +500,3 @@ def videos():
     return render_template('videos.html', videos=videos, cart_count=cart_count)
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
